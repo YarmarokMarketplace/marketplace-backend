@@ -18,7 +18,7 @@ app.use(logger(formatsLogger));
 // app.use(
 //   cors({
 //     credentials: true,
-//     origin: ["https://yourpet-nu.vercel.app", "http://localhost:3000"],
+//     origin: ["https://", "http://localhost:3000"],
 //   })
 // );
 
