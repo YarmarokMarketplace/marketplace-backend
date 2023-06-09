@@ -1,0 +1,44 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Marketplace Yarmarok 1.0.0",
+    "description": "Web platform where vendors can come together to sell their products or services to customers.\n\nThis is a Marketplace Yarmarok Application Server based on the OpenAPI 3.0 specification\n\nSome useful links:\n- [The YarmarokMarketplace repository](https://github.com/YarmarokMarketplace/marketplace-backend)",
+    "contact": {
+      "name": "API developers",
+      "email": "estasjuk@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001/api",
+      "description": "Development Server"
+    },
+    {
+      "url": "https://https://marketplace-backend-qegd.onrender.com/api",
+      "description": "Production Server"
+    }
+  ],
+  "consumes": [
+    "application/json",
+    "multipart/form-data"
+  ],
+  "produces": [
+    "application/json",
+    "multipart/form-data"
+  ],
+  "tags": [
+    {
+      "name": "Authorization",
+      "description": "User Authorization endpoints"
+    },
+    {
+      "name": "User",
+      "description": "User information endpoints"
+    },
+    {
+      "name": "Notices",
+      "description": "Notices endpoints"
+    }
+  ]
+}
