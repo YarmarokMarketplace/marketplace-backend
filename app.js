@@ -15,12 +15,12 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
 
-// app.use(
-//   cors({
-//     credentials: true,
-//     origin: ["https://", "http://localhost:3000"],
-//   })
-// );
+app.use(
+  cors({
+    credentials: true,
+    origin: ["http://yarmarok-env.eba-npm2c4pm.eu-central-1.elasticbeanstalk.com/", "http://localhost:8080"],
+  })
+);
 
 app.use(express.static("public"));
 app.use(express.json());
