@@ -23,7 +23,7 @@ jobs:
       run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
       
     - name: Configure my AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1
+      uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id    :  ${{ secrets.MY_AWS_ACCESS_KEY }}
         aws-secret-access-key:  ${{ secrets.MY_AWS_SECRET_KEY }}
@@ -33,7 +33,7 @@ jobs:
       run : aws s3 cp ${{ env.DEPLOY_PACKAGE_NAME }}  s3://${{ env.EB_PACKAGE_S3_BUCKET_NAME }}/
     
     - name: Print Happy Message for CI finish
-      run : echo "CI Pipeline part Finished successfully!"
+      run : echo "CI Pipeline part finished successfully!"
 
 
   my_cd_part:
@@ -53,11 +53,11 @@ jobs:
         aws elasticbeanstalk create-application-version \
         --application-name ${{ env.EB_APPLICATION_NAME }} \
         --source-bundle S3Bucket="${{ env.EB_PACKAGE_S3_BUCKET_NAME }}",S3Key="${{ env.DEPLOY_PACKAGE_NAME }}" \
-        --version-label "Ver-${{ github.sha }}" \
-        --description "CoimmitSHA-${{ github.sha }}"
+        --version-label "Version-${{ github.sha }}" \
+        --description "CommitSHA-${{ github.sha }}"
        
     - name: Deploy new ElasticBeanstalk Application Version
       run : aws elasticbeanstalk update-environment --environment-name ${{ env.EB_ENVIRONMENT_NAME }} --version-label "Ver-${{ github.sha }}"
       
     - name: Print Happy Message for CD finish
-      run : echo "CD Pipeline part Finished successfully!"
+      run : echo "CD Pipeline part finished successfully!"
