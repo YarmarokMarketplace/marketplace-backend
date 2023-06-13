@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "deploy": "npm ci && npm run build && npm run start:prod",
     "build": "",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint **/*.js",
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
+    "aws-sdk": "^2.1397.0",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.37.0",
     "cookie-parser": "^1.4.6",
