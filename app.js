@@ -18,7 +18,7 @@ app.use(logger(formatsLogger));
 app.use(
   cors({
     credentials: true,
-    origin: ["http://yarmarok-env.eba-npm2c4pm.eu-central-1.elasticbeanstalk.com/", "http://localhost:8080"],
+    origin: ["http://localhost:3000"],
   })
 );
 
