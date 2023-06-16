@@ -8,12 +8,17 @@ permissions:
   contents: read
 
 jobs:
-  EC2-Deploy:
+  ec2-deploy:
     runs-on: ubuntu-latest
     environment:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
+    - name: create .env file
+      run: |
+        touch .env
+        echo MONGODB_CONNECTION_STRING=${{ secrets.MONGODB_CONNECTION_STRING }}
+        cat .env
     - id: deploy
       name: Deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.6
