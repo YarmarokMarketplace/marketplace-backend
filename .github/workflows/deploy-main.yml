@@ -22,5 +22,6 @@ jobs:
         aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         aws_default_region: us-east-1
         ec2_instance_type: t3.micro
+        tf_state_bucket: yarmarok-backend
 
         app_port: 8081
