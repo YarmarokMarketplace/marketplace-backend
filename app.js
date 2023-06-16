@@ -11,7 +11,21 @@ const swaggerDocument = require("./swagger.json");
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
+app.get('/', (req, res, next) => {
+  res.render('index', {
+      heading: 'YarmarOK',
+      text: 'Some text',
+      time: (new Date().toUTCString())
+  })
+})
+
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
+app.get('/', (req, res) => {
+  res.render('index', {title: 'Hey', message: 'Hello World!'});
+});
 
 app.use(logger(formatsLogger));
 
