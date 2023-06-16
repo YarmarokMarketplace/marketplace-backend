@@ -14,6 +14,11 @@ jobs:
       name: ${{ github.ref_name }}
       url: ${{ steps.deploy.outputs.vm_url }}
     steps:
+    - name: Create .env file
+      uses: ozaytsev86/create-env-file@v1
+      with:
+        MONGODB_CONNECTION_STRING: ${{ secrets.MONGODB_CONNECTION_STRING }}
+
     - id: deploy
       name: Deploy
       uses: bitovi/github-actions-deploy-docker-to-ec2@v0.4.6
