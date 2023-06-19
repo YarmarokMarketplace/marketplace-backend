@@ -4,7 +4,7 @@ const express = require('express');
 const validateBody = require('../../../utils/validateBody');
 const upload = require("../../../utils/upload");
 
-const { getAllNotices, getNoticeById, addNoticeByCategory, removeNotice} = require('../../../controllers/notices');
+const { getAllNotices, addNoticeByCategory, } = require('../../../controllers/notices');
 const { addNoticeSchema} = require('../../../db/models/notices');
 
 const router = express.Router();
