@@ -6,7 +6,7 @@
   },
   "private": true,
   "scripts": {
-    "start": "node server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "deploy": "npm ci && npm run build && npm run start:prod",
     "build": "",
