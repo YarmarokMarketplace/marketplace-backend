@@ -1,20 +1,22 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
-const app = require("./app");
+const app = require('./app');
+const connectionDB = require('./db/connectionDB');
+const { PORT = 3000 } = process.env;
 
-const PORT = process.env.PORT || 8081;
-
-const start = async () => {
-  try {
-    await client.connect();
-    await client.db('admin').command({ ping: 1 });
-    console.log("Database connection successful");
-    app.listen(PORT, () => console.log(`server started on port: ${PORT}`));
-  } catch (e) {
-    console.log(e);
-  } finally {
-    await client.close();
-  }
+const startServer = async () => {
+    try {
+        await connectionDB();
+        console.log(
+            `${new Date().toLocaleString()}: Database connection successful`
+        );
+        app.listen(PORT, () => {
+            console.log(
+                `${new Date().toLocaleString()}: Server running. Use our API on port: ${PORT}`
+            );
+        });
+    } catch (error) {
+      console.log(error.message);
+      process.exit(1);
+    }
 };
 
-start().catch(console.dir);
+startServer();
