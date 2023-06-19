@@ -12,10 +12,10 @@ const noticeSchema = new Schema(
               "electricity", "spare-parts-for-transport", "fashion-and-style", "realty", "exchange",
           "repair", "work", "animals", "goods-to-win", "hobbies-recreation-sports"],
     },
-    typeOfGood: {
+    goodtype: {
       type: String,
       required: true,
-      enum: ["new", "used"],
+          enum: ["new", "used"],
     },
     title: {
       type: String,
