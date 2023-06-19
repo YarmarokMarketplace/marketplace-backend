@@ -12,7 +12,7 @@ const noticeSchema = new Schema(
               "electricity", "spare-parts-for-transport", "fashion-and-style", "realty", "exchange",
           "repair", "work", "animals", "goods-to-win", "hobbies-recreation-sports"],
     },
-    type: {
+    typeOfGood: {
       type: String,
       required: true,
       enum: ["new", "used"],
@@ -48,6 +48,7 @@ noticeSchema.post("save", handleMongooseError);
 
 const addNoticeSchema = Joi.object({
   category: Joi.string(),
+  typeOfGood: Joi.string(),
   title: Joi.string()
     .required().messages({
     "any.required": `"title" is required`,
