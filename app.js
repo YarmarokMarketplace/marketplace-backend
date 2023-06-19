@@ -8,7 +8,7 @@ const swaggerDocument = require("./swagger.json");
 const path = require('path');
 
 // const authRouter = require("./routes/api/auth/auth-routes");
-// const noticeRouter = require("./routes/api/notices/notices-routes");
+const noticeRouter = require("./routes/api/notices/notices-routes");
 // const userRouter = require("./routes/api/user/user-routes");
 
 const app = express();
@@ -36,7 +36,7 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // app.use("/api/auth", authRouter);
-// app.use("/api/notices", noticeRouter);
+app.use("/api/notices", noticeRouter);
 // app.use("/api/user", userRouter);
 
 
