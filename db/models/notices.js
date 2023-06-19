@@ -48,7 +48,7 @@ noticeSchema.post("save", handleMongooseError);
 
 const addNoticeSchema = Joi.object({
   category: Joi.string(),
-  typeOfGood: Joi.string(),
+  goodtype: Joi.string(),
   title: Joi.string()
     .required().messages({
     "any.required": `"title" is required`,
