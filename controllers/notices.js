@@ -58,7 +58,7 @@ const getNoticesByCategory = async (req, res) => {
 };
 
 
-const addNoticeByCategory = async (req, res) => {
+const addNotice = async (req, res) => {
     console.log(req.body);
     const photosDir = path.join(__dirname, "../", "public", "photos");
     const { path: tempUpload, filename } = req.file;
@@ -81,5 +81,5 @@ const addNoticeByCategory = async (req, res) => {
 module.exports = {
   getAllNotices: controllerWrapper(getAllNotices),
   getNoticesByCategory: controllerWrapper(getNoticesByCategory),
-  addNoticeByCategory: controllerWrapper(addNoticeByCategory),
+  addNotice: controllerWrapper(addNotice),
 };
