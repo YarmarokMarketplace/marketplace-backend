@@ -24,8 +24,8 @@ const noticeSchema = new Schema(
       type: String,
       required: true,
     },
-    photo: {
-      type: String,
+    photos: {
+      type: [String],
       required: false,
     },
     location: {

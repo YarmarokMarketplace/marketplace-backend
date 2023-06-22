@@ -1,7 +1,3 @@
-const { nanoid } = require("nanoid");
-const path = require('path');
-const fs = require('fs/promises');
-
 const { Notice } = require("../db/models/notices");
 const HttpError = require("../helpers/httpError");
 const controllerWrapper = require("../utils/controllerWrapper");
@@ -57,26 +53,15 @@ const getNoticesByCategory = async (req, res) => {
   });
 };
 
-
 const addNotice = async (req, res) => {
-    console.log(req.body);
-    const photosDir = path.join(__dirname, "../", "public", "photos");
-    const { path: tempUpload, filename } = req.file;
-    const uniqueId = nanoid();
-
-    const photoName = `${uniqueId}_${filename}`;
-    const resultUpload = path.join(photosDir, photoName);
-    console.log(tempUpload);
-    console.log(resultUpload);
-    fs.rename(tempUpload, resultUpload);
-    const photo = path.join("photos", photoName);
-
-    const result = await Notice.create({...req.body, photo});
+  const uploaded = req.files.map(reqfile => reqfile.location);
+  const result = await Notice.create({...req.body, photos: uploaded});
 
   res.status(201).json({
     result,
   });  
 };
+
 
 module.exports = {
   getAllNotices: controllerWrapper(getAllNotices),
