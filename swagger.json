@@ -31,6 +31,10 @@
     {
       "name": "Notices",
       "description": "Notices endpoints"
+    },
+    {
+      "name": "Categories",
+      "description": "Categories endpoints"
     }
   ],
   "paths": {
@@ -137,6 +141,34 @@
           }
         }
       }
+    },
+    "/main": {
+      "get": {
+        "summary": "Get all categories",
+        "tags": [
+          "Categories"
+        ],
+        "description": "Find all existing categories",
+        "operationId": "getAllCategories",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListOfCategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Categories not found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -173,7 +205,7 @@
                 }
               }
             },
-            "description": "List of notices found by reques"
+            "description": "List of notices found by request"
           }
         }
       },
@@ -310,6 +342,46 @@
             "type": "string",
             "description": "the update time of notice (backend-generated)",
             "example": "2023-05-15T10:51:30.531Z"
+          }
+        }
+      },
+      "ListOfCategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Backend-generated unique identifier",
+                  "example": "GGHJlhkj668__hjkhjkhh$%"
+                },
+                "name": {
+                  "type": "string",
+                  "enum": [
+                    "auto",
+                    "business-and-services",
+                    "for-free",
+                    "children's-world",
+                    "home-and-garden",
+                    "help",
+                    "electricity",
+                    "spare-parts-for-transport",
+                    "fashion-and-style",
+                    "realty",
+                    "exchange",
+                    "repair",
+                    "work",
+                    "animals",
+                    "goods-to-win",
+                    "hobbies-recreation-sports"
+                  ]
+                }
+              }
+            },
+            "description": "List of notices found by request"
           }
         }
       }

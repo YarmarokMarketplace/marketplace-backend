@@ -5,14 +5,15 @@ const validateBody = require('../../../utils/validateBody');
 const upload = require("../../../utils/upload");
 
 
-const { getAllNotices, addNotice, getNoticesByCategory } = require('../../../controllers/notices');
+const { addNotice, getNoticesByCategory } = require('../../../controllers/notices');
+// const { getAllCategories} = require('../../../controllers/categories')
 const { addNoticeSchema} = require('../../../db/models/notices');
 
 const router = express.Router();
 
-router.get('/', getAllNotices);
+// router.get('/', getAllCategories);
 router.get('/:category', getNoticesByCategory);
-router.post('/', upload.array('photos', 4), validateBody(addNoticeSchema), addNotice);
+router.post('/', upload.array('photos', 10), validateBody(addNoticeSchema), addNotice);
 
 
 module.exports = router;
