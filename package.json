@@ -1,12 +1,13 @@
 {
   "name": "template",
   "version": "1.0.0",
+  "main": "server.js",
   "engines": {
     "node": ">=14.20.1"
   },
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=production node src/server.js",
+    "start": "cross-env NODE_ENV=production node ./server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "deploy": "npm ci && npm run build && npm run start:prod",
     "build": "",

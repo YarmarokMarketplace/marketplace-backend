@@ -1,7 +1,7 @@
 FROM node:18-alpine
 ENV PORT=8081
 
-WORKDIR app
+WORKDIR /app
 COPY . .
 
 COPY package.json .
