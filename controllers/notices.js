@@ -28,14 +28,38 @@ const getAllNotices = async (req, res) => {
 };
 
 const getNoticesByCategory = async (req, res) => {
-  const { page = 1, limit = 9} = req.query;
+  const { page = 1, limit = 9, sort = "newest"} = req.query;
   const { category } = req.params;
   const skip = (page - 1) * limit;
+  let result = [];
 
-  const result = await Notice.find({ category }, "", {
-       skip,
-       limit: Number(limit),
-     }).sort({ createdAt: -1 });
+  if (sort === "newest") {
+    result = await Notice.find({ category }, "", {
+      skip,
+      limit: Number(limit),
+    }).sort({ createdAt: -1 });
+  }
+
+  else if (sort === "oldest") {
+    result = await Notice.find({ category }, "", {
+      skip,
+      limit: Number(limit),
+    }).sort({ createdAt: 1 });
+  }
+
+  else if (sort === "cheapest") { 
+    result = await Notice.find({ category }, "", {
+      skip,
+      limit: Number(limit),
+    }).sort({ price: 1 });
+  }
+    
+  else if (sort === "expensive") { 
+    result = await Notice.find({ category }, "", {
+      skip,
+      limit: Number(limit),
+    }).sort({ price: -1 });
+  }
 
     if (result.length === 0) {
       throw HttpError.NotFoundError("Notices not found");
