@@ -14,7 +14,6 @@ const noticeSchema = new Schema(
     },
     goodtype: {
       type: String,
-      required: true,
           enum: ["new", "used"],
     },
     title: {
@@ -25,8 +24,8 @@ const noticeSchema = new Schema(
       type: String,
       required: true,
     },
-    photo: {
-      type: String,
+    photos: {
+      type: [String],
       required: false,
     },
     location: {
