@@ -1,17 +1,31 @@
-const multer = require('multer');
-const path = require('path');
+const aws = require("aws-sdk");
+const multer = require("multer");
+const multerS3 = require("multer-s3");
+const { nanoid } = require("nanoid");
+const path = require("path");
 
-const tempDir = path.join(__dirname, '../', 'temp');
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
 
-const multerConfig = multer.diskStorage({
-    destination: tempDir,
-    filename: (req, file, cb) => { 
-        cb(null, file.originalname);
-    }
-})
+const s3 = new aws.S3();
 
 const upload = multer({
-    storage: multerConfig,
+    storage: multerS3({
+        s3,
+        bucket: 'yarmarok-bucket',
+        acl: 'public-read',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        metadata: (req, file, cb) => {
+            cb(null, { fieldName: file.fieldname });
+        },
+        key: (req, file, cb) => {
+            const ext = path.extname(file.originalname);
+            cb(null, `${nanoid()}${ext}`);
+        }
+    })
 });
 
 module.exports = upload;
+
