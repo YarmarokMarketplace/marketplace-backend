@@ -37,10 +37,12 @@ app.get('/', (req, res) => {
 
 app.use(logger(formatsLogger));
 
+const regEx = /^\d+$/
+
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:8080", "https://yarmarok.netlify.app/"],
+    origin: ["http://localhost:8080", "https://yarmarok.netlify.app/", `https://deploy-preview-${regEx}--yarmarok-test.netlify.app/` ],
   })
 );
 
