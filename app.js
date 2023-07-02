@@ -14,7 +14,7 @@ const app = express();
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
+  res.sendFile(path.join(__dirname, '/index.html'));
 });
 
 
@@ -39,7 +39,7 @@ app.use(logger(formatsLogger));
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:8080"],
+    origin: ["http://localhost:8080", "*.netlify.app"],
   })
 );
 
