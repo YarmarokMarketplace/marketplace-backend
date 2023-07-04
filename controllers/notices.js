@@ -32,9 +32,8 @@ const getNoticesByCategory = async (req, res) => {
   const { page = 1, limit = 9, sort = "newest"} = req.query;
   const { category } = req.params;
   const skip = (page - 1) * limit;
-  let result = [];
 
-    result = await Notice.find({ category }, "", {
+    const result = await Notice.find({ category }, "", {
       skip,
       limit: Number(limit),
     }).sort(buildSortObject(sort));
