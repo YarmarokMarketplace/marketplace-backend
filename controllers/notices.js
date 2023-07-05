@@ -1,6 +1,7 @@
 const { Notice } = require("../db/models/notices");
 const HttpError = require("../helpers/httpError");
 const controllerWrapper = require("../utils/controllerWrapper");
+const buildFilterObject = require("../utils/filterObject");
 
 const getAllNotices = async (req, res) => {
   const { page = 1, limit = 9 } = req.query;
@@ -28,15 +29,16 @@ const getAllNotices = async (req, res) => {
 };
 
 const getNoticesByCategory = async (req, res) => {
-  const { page = 1, limit = 9} = req.query;
+  const { page = 1, limit = 9, goodtype, priceRange} = req.query;
   const { category } = req.params;
   const skip = (page - 1) * limit;
+  const query = { category, goodtype, priceRange };
 
-  const result = await Notice.find({ category }, "", {
-       skip,
-       limit: Number(limit),
-     }).sort({ createdAt: -1 });
-
+  const result = await Notice.find(buildFilterObject(query), "", {
+      skip,
+      limit: Number(limit),
+  }).sort({ createdAt: -1 });
+  
     if (result.length === 0) {
       throw HttpError.NotFoundError("Notices not found");
     }
