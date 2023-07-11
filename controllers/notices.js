@@ -62,9 +62,23 @@ const addNotice = async (req, res) => {
   });  
 };
 
+const removeNotice = async (req, res) => {
+  const { id } = req.params;
+
+  const result = await Notice.findByIdAndDelete(id);
+  if (!result) {
+    throw HttpError.NotFoundError("Notice not found");
+  }
+  res.status(204).json({
+    data: {
+      message: "Notice deleted",
+    },
+  });
+};
 
 module.exports = {
   getAllNotices: controllerWrapper(getAllNotices),
   getNoticesByCategory: controllerWrapper(getNoticesByCategory),
   addNotice: controllerWrapper(addNotice),
+  removeNotice: controllerWrapper(removeNotice),
 };

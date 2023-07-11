@@ -2,18 +2,17 @@ require("dotenv").config();
 
 const express = require('express');
 const validateBody = require('../../../utils/validateBody');
-const upload = require("../../../utils/upload");
+const upload = require('../../../utils/upload');
+const isValidId = require('../../../middlewares/isValidId');
 
-
-const { addNotice, getNoticesByCategory } = require('../../../controllers/notices');
-// const { getAllCategories} = require('../../../controllers/categories')
+const { addNotice, getNoticesByCategory, removeNotice } = require('../../../controllers/notices');
 const { addNoticeSchema} = require('../../../db/models/notices');
 
 const router = express.Router();
 
-// router.get('/', getAllCategories);
 router.get('/:category', getNoticesByCategory);
-router.post('/', upload.array('photos', 10), validateBody(addNoticeSchema), addNotice);
+router.post('/', upload.array('photos', 6), validateBody(addNoticeSchema), addNotice);
+router.delete('/notice/:id', isValidId, removeNotice);
 
 
 module.exports = router;
