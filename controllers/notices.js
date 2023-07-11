@@ -62,9 +62,21 @@ const addNotice = async (req, res) => {
   });  
 };
 
+const getNoticeById = async (req, res) => {
+  const { id } = req.params;
+
+  const notice = await Notice.findById(id);
+  if (!notice) {
+    throw HttpError.NotFoundError("Notice not found");
+  }
+  res.status(201).json({
+    data: notice,
+  });
+};
 
 module.exports = {
   getAllNotices: controllerWrapper(getAllNotices),
   getNoticesByCategory: controllerWrapper(getNoticesByCategory),
   addNotice: controllerWrapper(addNotice),
+  getNoticeById: controllerWrapper(getNoticeById),
 };
